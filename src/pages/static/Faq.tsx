@@ -4,7 +4,7 @@ import { useStoreInfoStore } from '@/stores/storeInfoStore'
 
 interface FaqItem {
   q: string
-  a: string | ((email: string) => string)
+  a: string
 }
 
 const faqs: Record<string, FaqItem[]> = {

@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import { AlertCircle, Truck, Store, Wallet, Receipt, ShieldCheck, User } from 'lucide-react'
+import { AlertCircle, Truck, Store, Wallet, Receipt, ShieldCheck } from 'lucide-react'
 import { useCartStore, getTotalPrice } from '@/stores/cartStore'
 import { useOrderStore } from '@/stores/orderStore'
 import { useAuthStore } from '@/stores/authStore'
 import { formatPrice, getShippingFee } from '@/lib/utils'
-import type { ShippingMethod, PaymentMethod, CheckoutFormData } from '@/types'
+import type { CheckoutFormData } from '@/types'
 
 interface FormErrors {
   customer_name?: string

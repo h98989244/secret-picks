@@ -28,7 +28,7 @@ interface AuthState {
 const ADMIN_EMAIL = 'admin@secretpicks.com'
 const ADMIN_PASSWORD = 'admin123'
 
-export const useAuthStore = create<AuthState>()((set, get) => ({
+export const useAuthStore = create<AuthState>()((set) => ({
   // Admin
   isAdmin: false,
   adminEmail: null,
@@ -92,7 +92,7 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
 
       // If no session, email confirmation may be required
       // Try to sign in immediately (works if autoconfirm is enabled in Supabase settings)
-      const { data: loginData, error: loginError } = await supabase.auth.signInWithPassword({
+      const { data: loginData } = await supabase.auth.signInWithPassword({
         email,
         password,
       })

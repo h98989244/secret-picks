@@ -1,15 +1,13 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Package, Layers, Eye, TrendingUp, ShoppingCart, Clock } from 'lucide-react'
+import { Package, Eye, ShoppingCart, Clock } from 'lucide-react'
 import { useProductStore } from '@/stores/productStore'
 import { useOrderStore } from '@/stores/orderStore'
 import { formatPrice, ORDER_STATUS_MAP, PAYMENT_METHOD_LABEL } from '@/lib/utils'
 
 export default function Dashboard() {
   const products = useProductStore((s) => s.products)
-  const categories = useProductStore((s) => s.categories)
   const activeProducts = products.filter((p) => p.is_active)
-  const featuredProducts = products.filter((p) => p.is_featured)
   const orders = useOrderStore((s) => s.orders)
   const fetchOrders = useOrderStore((s) => s.fetchOrders)
 

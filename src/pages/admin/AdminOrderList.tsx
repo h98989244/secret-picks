@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { ChevronDown, ChevronUp, Search, Save } from 'lucide-react'
 import { useOrderStore } from '@/stores/orderStore'
 import { formatPrice, ORDER_STATUS_MAP, PAYMENT_METHOD_LABEL, SHIPPING_METHOD_LABEL } from '@/lib/utils'
-import type { Order, OrderStatus } from '@/types'
+import type { OrderStatus } from '@/types'
 
 const ALL_STATUSES: OrderStatus[] = ['pending_payment', 'paid', 'processing', 'shipped', 'completed', 'cancelled']
 
