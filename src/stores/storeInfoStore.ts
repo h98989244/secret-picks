@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { supabase } from '@/lib/supabase'
+import { supabase, supabaseAdmin } from '@/lib/supabase'
 import type { StoreInfo } from '@/types'
 
 const defaultInfo: StoreInfo = {
@@ -46,9 +46,13 @@ export const useStoreInfoStore = create<StoreInfoState>()((set, get) => ({
     const updateData = { ...data, updated_at: new Date().toISOString() }
 
     if (currentId) {
-      await supabase.from('store_info').update(updateData).eq('id', currentId)
+      const { error } = await supabaseAdmin.from('store_info').update(updateData).eq('id', currentId)
+      if (error) {
+        console.error('Failed to update store info:', error.message)
+        return
+      }
     }
 
-    set({ info: { ...get().info, ...updateData } as StoreInfo })
+    set({ info: { ...get().info, ...updateData } as StoreInfo, initialized: false })
   },
 }))

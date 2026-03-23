@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { supabase } from '@/lib/supabase'
+import { supabase, supabaseAdmin } from '@/lib/supabase'
 import type { Product, Category } from '@/types'
 
 interface ProductState {
@@ -107,7 +107,7 @@ export const useProductStore = create<ProductState>()((set, get) => ({
     delete cleanData.created_at
     cleanData.updated_at = new Date().toISOString()
 
-    await supabase.from('products').update(cleanData).eq('id', id)
+    await supabaseAdmin.from('products').update(cleanData).eq('id', id)
 
     set({
       products: get().products.map((p) =>
@@ -117,8 +117,8 @@ export const useProductStore = create<ProductState>()((set, get) => ({
   },
 
   deleteProduct: async (id) => {
-    await supabase.from('product_images').delete().eq('product_id', id)
-    await supabase.from('products').delete().eq('id', id)
+    await supabaseAdmin.from('product_images').delete().eq('product_id', id)
+    await supabaseAdmin.from('products').delete().eq('id', id)
 
     set({ products: get().products.filter((p) => p.id !== id) })
   },
@@ -128,7 +128,7 @@ export const useProductStore = create<ProductState>()((set, get) => ({
     if (!product) return
 
     const newActive = !product.is_active
-    await supabase.from('products').update({ is_active: newActive }).eq('id', id)
+    await supabaseAdmin.from('products').update({ is_active: newActive }).eq('id', id)
 
     set({
       products: get().products.map((p) =>

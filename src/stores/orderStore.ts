@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { supabase } from '@/lib/supabase'
+import { supabase, supabaseAdmin } from '@/lib/supabase'
 import type { Order, OrderStatus, OrderItem, CheckoutFormData, CartItem } from '@/types'
 
 function generateOrderNumber(): string {
@@ -74,7 +74,7 @@ export const useOrderStore = create<OrderState>()((set, get) => ({
       admin_notes: '',
     }
 
-    const { data, error } = await supabase
+    const { data, error } = await supabaseAdmin
       .from('orders')
       .insert(orderData)
       .select()
@@ -84,7 +84,7 @@ export const useOrderStore = create<OrderState>()((set, get) => ({
       // If unique constraint violation on order_number, retry once
       if (error.code === '23505') {
         orderData.order_number = generateOrderNumber()
-        const retry = await supabase.from('orders').insert(orderData).select().single()
+        const retry = await supabaseAdmin.from('orders').insert(orderData).select().single()
         if (retry.error) {
           set({ loading: false, error: '訂單建立失敗，請稍後再試。' })
           return null
