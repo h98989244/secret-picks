@@ -25,7 +25,7 @@ interface AuthState {
   clearError: () => void
 }
 
-const ADMIN_EMAIL = 'admin@secretpicks.com'
+const ADMIN_EMAIL = 'Culturalbbc@outlook.com'
 const ADMIN_PASSWORD = 'admin123'
 
 export const useAuthStore = create<AuthState>()((set) => ({

@@ -42,7 +42,7 @@ export default function AdminLogin() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@secretpicks.com"
+                placeholder="請輸入管理員信箱"
                 className="w-full px-4 py-2.5 rounded-lg border border-gray-200 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
                 required
               />
@@ -68,7 +68,7 @@ export default function AdminLogin() {
           </button>
 
           <p className="text-xs text-warm-gray text-center mt-4">
-            預設帳號：admin@secretpicks.com / admin123
+            僅限授權管理員登入
           </p>
         </form>
       </div>
