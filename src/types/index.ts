@@ -117,6 +117,22 @@ export interface Order {
   updated_at: string
 }
 
+export interface Partner {
+  id: string
+  company_name: string
+  contact_name: string
+  address: string
+  tax_id: string
+  phone: string
+  mobile: string
+  email: string
+  description: string
+  sort_order: number
+  is_active: boolean
+  created_at: string
+  updated_at: string
+}
+
 export interface CheckoutFormData {
   customer_name: string
   customer_email: string

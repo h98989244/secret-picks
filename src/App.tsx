@@ -21,6 +21,7 @@ import Faq from '@/pages/static/Faq'
 import OrderTrack from '@/pages/static/OrderTrack'
 import ReturnPolicy from '@/pages/static/ReturnPolicy'
 import Shipping from '@/pages/static/Shipping'
+import Partners from '@/pages/static/Partners'
 
 import Checkout from '@/pages/Checkout'
 import OrderConfirmation from '@/pages/OrderConfirmation'
@@ -80,6 +81,7 @@ export default function App() {
           <Route path="/order/track" element={<OrderTrack />} />
           <Route path="/return-policy" element={<ReturnPolicy />} />
           <Route path="/shipping" element={<Shipping />} />
+          <Route path="/partners" element={<Partners />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/order/confirmation/:orderNumber" element={<OrderConfirmation />} />
         </Route>

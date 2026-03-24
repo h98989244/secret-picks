@@ -1,9 +1,16 @@
 import { Link } from 'react-router-dom'
-import { Mail, Phone, MapPin } from 'lucide-react'
+import { useEffect } from 'react'
+import { Mail, Phone, MapPin, Building2 } from 'lucide-react'
 import { useStoreInfoStore } from '@/stores/storeInfoStore'
+import { usePartnerStore } from '@/stores/partnerStore'
 
 export default function Footer() {
   const info = useStoreInfoStore((s) => s.info)
+  const { partners, fetchPartners } = usePartnerStore()
+
+  useEffect(() => {
+    fetchPartners()
+  }, [fetchPartners])
 
   return (
     <footer className="bg-navy text-white/80 mt-auto">
@@ -26,6 +33,7 @@ export default function Footer() {
             <h4 className="font-serif text-gold text-sm font-bold mb-4">關於我們</h4>
             <ul className="space-y-2 text-sm list-none p-0">
               <li><Link to="/about" className="text-white/60 hover:text-gold transition-colors no-underline">品牌故事</Link></li>
+              <li><Link to="/partners" className="text-white/60 hover:text-gold transition-colors no-underline">合作夥伴</Link></li>
               <li><Link to="/guide" className="text-white/60 hover:text-gold transition-colors no-underline">購物須知</Link></li>
               <li><Link to="/privacy" className="text-white/60 hover:text-gold transition-colors no-underline">隱私政策</Link></li>
               <li><Link to="/faq" className="text-white/60 hover:text-gold transition-colors no-underline">常見問題</Link></li>
@@ -62,8 +70,39 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Partners section */}
+        {partners.length > 0 && (
+          <div className="mt-8 pt-6 border-t border-white/10">
+            <div className="flex items-center gap-2 mb-4">
+              <Building2 size={14} className="text-gold" />
+              <h4 className="text-xs font-medium text-white/50 tracking-wider uppercase">合作夥伴</h4>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {partners.map((p) => (
+                <div key={p.id} className="flex items-start gap-3 text-xs text-white/40">
+                  <div className="shrink-0 mt-0.5">
+                    <div className="w-5 h-5 rounded bg-white/10 flex items-center justify-center">
+                      <Building2 size={10} className="text-gold/70" />
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-white/60 font-medium text-sm">{p.company_name}</p>
+                    <p className="mt-0.5">{p.address} | 統編：{p.tax_id}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <Link
+              to="/partners"
+              className="inline-block mt-3 text-xs text-gold/70 hover:text-gold transition-colors no-underline"
+            >
+              查看完整合作夥伴資訊 →
+            </Link>
+          </div>
+        )}
+
         {/* Bottom bar */}
-        <div className="mt-10 pt-6 border-t border-white/10">
+        <div className="mt-8 pt-6 border-t border-white/10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-xs text-white/40">
               統一編號：{info.tax_id} | © 2026 秘境選物 All rights reserved.
